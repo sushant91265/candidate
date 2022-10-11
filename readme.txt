@@ -21,4 +21,4 @@ Please document here:
 
 * An explanation of your definition of fairness execution
 - Each customer should get around the same amount of execution time.
-- We are achieving this by summing up the duration of Jobs for each customerId and then sorting jobs based on the sum 
+- We are achieving this by summing up the duration of Jobs for each customerId and then sorting jobs based on the sum.

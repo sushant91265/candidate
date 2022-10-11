@@ -21,16 +21,21 @@ public class JobRunnerImpl implements JobRunner {
 
     @Override
     public void run(final JobQueue jobQueue) {
-        while (shouldContinue) {
-            final Job oldJob = jobQueue.pop();
-            // calculate priority by summing the job duration
-            final int priority = this.customerPriorityMap.merge(oldJob.customerId(), Math.abs(oldJob.duration()), Integer::sum);
-            // create a new job wrapper with the calculated priority and sorted priority
-            final JobRunnable jobRunnable = new JobRunnable(oldJob, priority);
-            this.threadExecutor.execute(jobRunnable);
+        try{
+            while (shouldContinue) {
+                final Job oldJob = jobQueue.pop();
+                // calculate priority by summing the job duration
+                final int priority = this.customerPriorityMap.merge(oldJob.customerId(), Math.abs(oldJob.duration()), Integer::sum);
+                // create a new job wrapper with the calculated priority and sorted priority
+                final JobRunnable jobRunnable = new JobRunnable(oldJob, priority);
+                System.out.println(jobRunnable);
+                this.threadExecutor.execute(jobRunnable);
+            }
+            logger.info("shutting down");
+            shutdownFinished = true;
+        } catch (Throwable throwable) {
+            logger.error("error occurred", throwable);
         }
-        logger.info("shutting down");
-        shutdownFinished = true;
     }
 
     @Override
@@ -88,6 +93,14 @@ class JobRunnable implements Runnable, Comparable<JobRunnable> {
     @Override
     public int compareTo(final JobRunnable nextJob) {
         return Integer.compare(this.priority(), nextJob.priority());
+    }
+
+    @Override
+    public String toString() {
+        return "JobRunnable{" +
+                "job=" + job +
+                ", priority=" + priority +
+                '}';
     }
 }
 

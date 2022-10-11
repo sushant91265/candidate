@@ -48,4 +48,12 @@ public class NaiveJob implements Job {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String toString() {
+        return "NaiveJob{" +
+                "customerId=" + customerId +
+                ", duration=" + duration +
+                '}';
+    }
 }
