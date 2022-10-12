@@ -22,3 +22,12 @@ Please document here:
 * An explanation of your definition of fairness execution
 - Each customer should get around the same amount of execution time.
 - We are achieving this by summing up the duration of Jobs for each customerId and then sorting jobs based on the sum.
+
+
+* Ref:
+- https://engineering.zalando.com/posts/2019/04/how-to-set-an-ideal-thread-pool-size.html
+- https://jvmaware.com/priority-queue-and-threadpool/
+- https://stackoverflow.com/questions/6470651/how-can-i-create-a-memory-leak-in-java?rq=1
+- https://www.geeksforgeeks.org/hashmap-mergekey-value-bifunction-method-in-java-with-examples/
+- https://stackoverflow.com/questions/53962825/how-is-fairness-of-thread-scheduling-ensured-across-processes
+- https://github.com/EnerNOC/fair-executor
