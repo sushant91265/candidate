@@ -25,7 +25,7 @@ public class JobRunnerImpl implements JobRunner {
             while (shouldContinue) {
                 final Job oldJob = jobQueue.pop();
                 // calculate priority by summing the job duration
-                final int priority = this.customerPriorityMap.merge(oldJob.customerId(), Math.abs(oldJob.duration()), Integer::sum);
+                final int priority = this.customerPriorityMap.merge(oldJob.customerId(), 1, Integer::sum);
                 // create a new job wrapper with the calculated priority and sorted priority
                 final JobRunnable jobRunnable = new JobRunnable(oldJob, priority);
                 System.out.println(jobRunnable);
